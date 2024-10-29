@@ -28,4 +28,4 @@ pins to set the time.
 
 ## External hardware
 
-A custom PCB is attached to the Pmod interfaces. See: [](https://github.com/sellicott/sellicott_tt5_digital_clock/blob/main/pcb/docs/tt5_led_clock.pdf)
+A custom PCB is attached to the Pmod interfaces. See: [Desk Clock PCB Schematic](https://github.com/sellicott/sellicott_tt5_digital_clock/blob/main/pcb/docs/tt5_led_clock.pdf)
