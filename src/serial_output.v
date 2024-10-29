@@ -1,4 +1,3 @@
-`timescale 1ns / 1ns
 `default_nettype none
 
 module serial_7seg_out (

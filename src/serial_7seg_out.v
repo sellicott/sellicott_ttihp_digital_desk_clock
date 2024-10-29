@@ -5,7 +5,6 @@
  * general purpose shift register for outputing data serialy
  */
 
-`timescale 1ns / 1ns
 `default_nettype none
 
 module shift_register (

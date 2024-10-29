@@ -3,10 +3,7 @@
  * Top level module for the digital clock deisgn
  * Wraps the actual design for use with the TinyTapeout4 template
  */
-`timescale 1ns / 1ns
-;
 `default_nettype none
-;
 
 module tt_um_digital_clock_sellicott (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches

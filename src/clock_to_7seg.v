@@ -1,7 +1,4 @@
-`timescale 1ns / 1ns
-;
 `default_nettype none
-;
 
 module clock_to_7seg (
     i_clk,

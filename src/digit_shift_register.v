@@ -15,29 +15,23 @@ module digit_shift_register (
     output wire serial_out
 );
 
-reg [7:0] shift_reg = 0;
+  reg [7:0] shift_reg = 0;
 
-assign serial_out = shift_reg[0] && en;
+  assign serial_out = shift_reg[0] && en;
 
-always @(posedge clk)
-begin
-    if (en)
-    begin
-        if (load)
-        begin
-            shift_reg <= {dp_in, led_in};
+  always @(posedge clk) begin
+    if (en) begin
+      if (load) begin
+        shift_reg <= {dp_in, led_in};
+      end else begin
+        // shift data in the register 1 -> 0, 2 -> 1, etc 
+        for (integer i = 0; i < 7; i = i + 1) begin
+          shift_reg[i] <= shift_reg[i+1];
         end
-        else
-        begin
-            // shift data in the register 1 -> 0, 2 -> 1, etc 
-            for(integer i = 0; i < 7; i = i + 1)
-            begin
-                shift_reg[i] <= shift_reg[i+1];
-            end
-            // load a 0 into the MSB of the register
-            shift_reg[7] <= 0;
-        end
+        // load a 0 into the MSB of the register
+        shift_reg[7] <= 0;
+      end
     end
-end
+  end
 
 endmodule
