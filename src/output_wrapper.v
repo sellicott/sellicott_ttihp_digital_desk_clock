@@ -49,11 +49,15 @@ module output_wrapper (
   wire [3:0] clk_bcd;
   wire       clk_dp;
 
+  reg [4:0] hours_int;
+  reg [5:0] minutes_int;
+  reg [5:0] seconds_int;
+
   clock_to_bcd clock_to_bcd_conv_inst (
     // input signals from the clock
-    .i_hours   (i_hours),
-    .i_minutes (i_minutes),
-    .i_seconds (i_seconds),
+    .i_hours   (hours_int),
+    .i_minutes (minutes_int),
+    .i_seconds (seconds_int),
     .i_dp      (i_dp),
 
     // select what part of the clock output to convert
@@ -131,6 +135,23 @@ module output_wrapper (
       state <= IDLE;
     end
   end
+
+  // add some pipelining for the display output
+  always @(posedge i_clk) begin
+    if (i_stb & !o_busy) begin
+      hours_int <= i_hours;
+      minutes_int <= i_minutes;
+      seconds_int <= i_seconds;
+    end
+
+    if (!i_reset_n) begin
+      hours_int <= 5'd0;
+      minutes_int <= 6'd0;
+      seconds_int <= 6'd0;
+    end
+    
+  end
+
   assign seg_select = state - WRITE;
 
   assign driver_stb = (state > IDLE) && !o_ack;

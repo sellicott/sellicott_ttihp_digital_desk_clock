@@ -224,7 +224,7 @@ module tiny_tapeout_tb ();
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
-        repeat (5) @(posedge serial_load);
+        repeat (6) @(posedge serial_load);
         update_count = update_count + 1;
       end
 
@@ -250,7 +250,7 @@ module tiny_tapeout_tb ();
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
-        repeat (5) @(posedge serial_load);
+        repeat (6) @(posedge serial_load);
         update_count = update_count + 1;
       end
 
@@ -266,7 +266,7 @@ module tiny_tapeout_tb ();
       i_set_hours   = 1'h1;
       i_set_minutes = 1'h1;
       repeat (2) @(negedge clk_set_stb);
-      repeat (5) @(posedge serial_load);
+      repeat (6) @(posedge serial_load);
       `assert(clktime_seconds, 6'h0);
       @(posedge clk);
       i_set_hours = 1'h0;
