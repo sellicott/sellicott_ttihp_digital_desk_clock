@@ -65,13 +65,6 @@ module tiny_tapeout_tb ();
 `endif
 
 
-  reg run_timeout_counter;
-  reg [15:0] timeout_counter = 0;
-  always @(posedge refclk) begin
-    if (run_timeout_counter) timeout_counter <= timeout_counter + 1'd1;
-    else timeout_counter <= 16'h0;
-  end
-
   // model specific signals
   localparam REFCLK_PERIOD = 200;
   localparam REFCLK_HALF_PERIOD = REFCLK_PERIOD / 2;
@@ -79,6 +72,13 @@ module tiny_tapeout_tb ();
 
   always #(REFCLK_HALF_PERIOD) begin
     refclk <= ~refclk;
+  end
+
+  reg run_timeout_counter;
+  reg [15:0] timeout_counter = 0;
+  always @(posedge refclk) begin
+    if (run_timeout_counter) timeout_counter <= timeout_counter + 1'd1;
+    else timeout_counter <= 16'h0;
   end
 
   // sync register
