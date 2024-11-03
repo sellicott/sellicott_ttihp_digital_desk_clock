@@ -19,7 +19,7 @@ will not affect the hours setting. If both `hours_set` and `minutes_set` are pre
 the seconds will be cleared to zero.
 
 A block diagram of the system is shown below.
-![[](block-diagram.svg)
+![](block-diagram.svg)
 
 ## How to test
 Apply a 5MHz clock to the clock pin and 32.786Khz signal to the refclk pin.
