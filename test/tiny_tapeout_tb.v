@@ -42,7 +42,7 @@ module tiny_tapeout_tb ();
   end
 
   // setup global signals
-  localparam CLK_PERIOD = 50;
+  localparam CLK_PERIOD = 100;
   localparam CLK_HALF_PERIOD = CLK_PERIOD / 2;
 
   reg clk = 0;
@@ -67,13 +67,13 @@ module tiny_tapeout_tb ();
 
   reg run_timeout_counter;
   reg [15:0] timeout_counter = 0;
-  always @(posedge clk) begin
+  always @(posedge refclk) begin
     if (run_timeout_counter) timeout_counter <= timeout_counter + 1'd1;
     else timeout_counter <= 16'h0;
   end
 
   // model specific signals
-  localparam REFCLK_PERIOD = 113;
+  localparam REFCLK_PERIOD = 200;
   localparam REFCLK_HALF_PERIOD = REFCLK_PERIOD / 2;
   reg refclk = 0;
 
@@ -213,16 +213,19 @@ module tiny_tapeout_tb ();
   wire [5:0] clktime_seconds = bcd4 * 10 + bcd5;
 
   task clock_set_hours(input [4:0] hours_settime);
-    begin
+    begin: set_hours
+      integer update_count;
       i_set_hours = 1'h1;
       reset_timeout_counter();
-      while (clktime_hours < hours_settime && timeout_counter <= TIMEOUT) begin
+      update_count = 0;
+      while (clktime_hours < hours_settime && timeout_counter <= TIMEOUT && update_count < 30) begin
         @(posedge clk_set_stb);
         `assert_cond(timeout_counter, <, TIMEOUT);
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
         repeat (5) @(posedge serial_load);
+        update_count = update_count + 1;
       end
 
       `assert(clktime_hours, hours_settime);
@@ -233,16 +236,22 @@ module tiny_tapeout_tb ();
   endtask
 
   task clock_set_minutes(input [5:0] minutes_settime);
-    begin
+    begin: set_minutes
+      integer update_count;
       i_set_minutes = 1'h1;
       reset_timeout_counter();
-      while (clktime_minutes != minutes_settime && timeout_counter <= TIMEOUT) begin
+      update_count = 0;
+      while (clktime_minutes != minutes_settime
+          && timeout_counter <= TIMEOUT
+          && update_count < 70) begin
+
         @(posedge clk_set_stb);
         `assert_cond(timeout_counter, <, TIMEOUT);
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
         repeat (5) @(posedge serial_load);
+        update_count = update_count + 1;
       end
 
       `assert(clktime_minutes, minutes_settime);
@@ -256,8 +265,8 @@ module tiny_tapeout_tb ();
     begin
       i_set_hours   = 1'h1;
       i_set_minutes = 1'h1;
-      ;
       repeat (2) @(negedge clk_set_stb);
+      repeat (5) @(posedge serial_load);
       `assert(clktime_seconds, 6'h0);
       @(posedge clk);
       i_set_hours = 1'h0;
