@@ -307,8 +307,7 @@ module tiny_tapeout_tb ();
     begin
       i_set_hours   = 1'h1;
       i_set_minutes = 1'h1;
-      repeat (2) @(negedge clk_set_stb);
-      repeat (6) @(posedge serial_load);
+      repeat (2) @(posedge clk_set_stb);
       `assert(clktime_seconds, 6'h0);
       @(posedge clk);
       i_set_hours = 1'h0;

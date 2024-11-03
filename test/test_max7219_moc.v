@@ -83,10 +83,11 @@ module test_max7219_moc (
       4'h8: digit[7] <= data;
       DECODE_MODE_ADDR:  decode_mode  <= data;
       INTENSITY_ADDR:    intensity    <= data[3:0];
-      SCAN_LIMIT_ADDR:   scan_limit   <= data[2:0];
+      //SCAN_LIMIT_ADDR:   scan_limit   <= data[2:0];
+      SCAN_LIMIT_ADDR:   scan_limit   <= 3'd7;
       SHUTDOWN_ADDR:     enable       <= data[0];
       DISPLAY_TEST_ADDR: display_test <= data[0];
-      default: $display("Invalid Address");
+      default: $display("Mock MAX7219: Invalid Address (0x%h)", addr);
     endcase
   end
 
