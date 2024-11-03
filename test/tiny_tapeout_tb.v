@@ -229,7 +229,8 @@ module tiny_tapeout_tb ();
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
-        repeat (6) @(posedge serial_load);
+        //repeat (6) @(posedge serial_load);
+        repeat (150) @(posedge clk); // this is because the gl simulation does weird things
         update_count = update_count + 1;
       end
       `assert(clktime_hours, 5'd0);
@@ -244,7 +245,8 @@ module tiny_tapeout_tb ();
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
-        repeat (6) @(posedge serial_load);
+        //repeat (6) @(posedge serial_load);
+        repeat (150) @(posedge clk); // this is because the gl simulation does weird things
         update_count = update_count + 1;
       end
       `assert(clktime_minutes, 6'd0);
@@ -267,7 +269,8 @@ module tiny_tapeout_tb ();
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
-        repeat (6) @(posedge serial_load);
+        //repeat (6) @(posedge serial_load);
+        repeat (150) @(posedge clk); // this is because the gl simulation does weird things
         update_count = update_count + 1;
       end
 
@@ -293,7 +296,8 @@ module tiny_tapeout_tb ();
         $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
                  clktime_seconds);
         reset_timeout_counter();
-        repeat (6) @(posedge serial_load);
+        //repeat (6) @(posedge serial_load);
+        repeat (150) @(posedge clk); // this is because the gl simulation does weird things
         update_count = update_count + 1;
       end
 
