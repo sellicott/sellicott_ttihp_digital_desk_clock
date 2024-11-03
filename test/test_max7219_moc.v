@@ -10,6 +10,7 @@
 `default_nettype none
 
 module test_max7219_moc (
+  i_clk,
   i_serial_din,
   i_serial_load,
   i_serial_clk,
@@ -24,6 +25,7 @@ module test_max7219_moc (
   o_digit7
 );
 
+  input wire i_clk;
   input wire i_serial_din;
   input wire i_serial_load;
   input wire i_serial_clk;
@@ -70,28 +72,29 @@ module test_max7219_moc (
     end
   end
 
-  always @(posedge i_serial_load) begin 
-    case (addr)
-      DUMMY_ADDR: ;
-      4'h1: digit[0] <= data;
-      4'h2: digit[1] <= data;
-      4'h3: digit[2] <= data;
-      4'h4: digit[3] <= data;
-      4'h5: digit[4] <= data;
-      4'h6: digit[5] <= data;
-      4'h7: digit[6] <= data;
-      4'h8: digit[7] <= data;
-      //DECODE_MODE_ADDR:  decode_mode  <= data;
-      DECODE_MODE_ADDR:  decode_mode  <= 8'hff;
-      INTENSITY_ADDR:    intensity    <= data[3:0];
-      //SCAN_LIMIT_ADDR:   scan_limit   <= data[2:0];
-      SCAN_LIMIT_ADDR:   scan_limit   <= 3'd7;
-      //SHUTDOWN_ADDR:     enable       <= data[0];
-      SHUTDOWN_ADDR:     enable       <= 1'b1;
-      //DISPLAY_TEST_ADDR: display_test <= data[0];
-      DISPLAY_TEST_ADDR: display_test <= 1'b0;
-      default: $display("Mock MAX7219: Invalid Address (0x%h)", addr);
-    endcase
+  always @(posedge i_clk) begin 
+    if (i_serial_load) begin 
+      case (addr)
+        DUMMY_ADDR: ;
+        4'h1: digit[0] <= data;
+        4'h2: digit[1] <= data;
+        4'h3: digit[2] <= data;
+        4'h4: digit[3] <= data;
+        4'h5: digit[4] <= data;
+        4'h6: digit[5] <= data;
+        4'h7: digit[6] <= data;
+        4'h8: digit[7] <= data;
+        //DECODE_MODE_ADDR:  decode_mode  <= data;
+        DECODE_MODE_ADDR:  decode_mode  <= 8'hff;
+        INTENSITY_ADDR:    intensity    <= data[3:0];
+        SCAN_LIMIT_ADDR:   scan_limit   <= data[2:0];
+        //SCAN_LIMIT_ADDR:   scan_limit   <= 3'd7;
+        SHUTDOWN_ADDR:     enable       <= data[0];
+        DISPLAY_TEST_ADDR: display_test <= data[0];
+        DISPLAY_TEST_ADDR: display_test <= 1'b0;
+        default: $display("Mock MAX7219: Invalid Address (0x%h)", addr);
+      endcase
+    end
   end
 
   wire [3:0] bcd [7:0];

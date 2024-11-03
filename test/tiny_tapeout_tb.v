@@ -150,6 +150,7 @@ module tiny_tapeout_tb ();
   wire [7:0] digit7;
 
   test_max7219_moc display_out (
+      .i_clk(clk),
       .i_serial_din (serial_dout),
       .i_serial_load(serial_load),
       .i_serial_clk (serial_clk),
