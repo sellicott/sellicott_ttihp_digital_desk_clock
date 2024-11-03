@@ -1,4 +1,4 @@
-/* clock_register.v
+/* clock_to_bcd.v
  * Copyright (c) 2024 Samuel Ellicott
  * SPDX-License-Identifier: Apache-2.0
  * Date: October 30, 2024
@@ -14,7 +14,7 @@
 
 `default_nettype none
 
-module clock_to_7seg (
+module clock_to_bcd (
   // input signals from the clock
   i_hours,
   i_minutes,
@@ -26,7 +26,8 @@ module clock_to_7seg (
   i_seg_select,
 
   // 7-segment display output o_7seg[7] -> decimal point
-  o_7seg
+  o_bcd,
+  o_dp
 );
 
 input wire [4:0] i_hours;
@@ -34,9 +35,10 @@ input wire [5:0] i_minutes;
 input wire [5:0] i_seconds;
 input wire [5:0] i_dp;
 
-input wire [3:0] i_seg_select;
+input wire [2:0] i_seg_select;
 
-output wire [7:0] o_7seg;
+output wire [3:0] o_bcd;
+output wire o_dp;
 
 // generate internal wires that zero out the appropriate signals for the
 // binary -> bcd converter
@@ -49,39 +51,36 @@ reg [6:0] time_int;
 reg seg_dp;
 always @(*) begin
   case (i_seg_select)
-    4'h0: begin
+    3'h0: begin
       time_int = hours_int;
       seg_dp   = i_dp[5];
     end
-    4'h1: begin 
+    3'h1: begin 
       time_int = hours_int;
       seg_dp   = i_dp[4];
     end
-    4'h2: begin
+    3'h2: begin
       time_int = minutes_int;
       seg_dp   = i_dp[3];
     end
-    4'h3: begin
+    3'h3: begin
       time_int = minutes_int;
       seg_dp   = i_dp[2];
     end
-    4'h4: begin
+    3'h4: begin
       time_int = seconds_int;
       seg_dp   = i_dp[1];
     end
-    4'h5: begin 
+    3'h5: begin 
       time_int = seconds_int;
       seg_dp   = i_dp[0];
     end
     default: begin
-      time_int = 6'h3f;
+      time_int = 7'h3f;
       seg_dp   = 1'b1;
     end
   endcase
 end
-
-// assign the dp signal to the appropriate output signal
-assign o_7seg[7] = seg_dp;
 
 // Convert the binary format time into two BCD segments
 wire [3:0] time_msb;
@@ -101,11 +100,8 @@ always @(*) begin
   endcase
 end
 
-// convert the bcd signal into a 7-segment output
-bcd_to_7seg bcd_to_7seg_inst (
-  .i_bcd(seg_bcd),
-  .o_led(o_7seg[6:0])
-);
+assign o_bcd = seg_bcd;
+assign o_dp  = seg_dp;
 
 endmodule
 

@@ -1,0 +1,47 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Fri Nov 01 21:39:05 2024
+[*]
+[dumpfile] "D:\sellicott_tt_7seg_clock_2024\display_controller_tb.fst"
+[dumpfile_mtime] "Fri Nov 01 21:38:44 2024"
+[dumpfile_size] 95738
+[savefile] "D:\sellicott_tt_7seg_clock_2024\test\display_controller_tb.gtkw"
+[timestart] 106900
+[size] 1659 708
+[pos] -1 -1
+*-14.700000 133900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] display_controller_tb.
+[sst_width] 246
+[signals_width] 193
+[sst_expanded] 1
+[sst_vpaned_height] 171
+@28
+display_controller_tb.clk
+@29
+display_controller_tb.refclk
+@28
+display_controller_tb.clk_set_stb
+@24
+display_controller_tb.clk_hours[4:0]
+display_controller_tb.clk_minutes[5:0]
+display_controller_tb.clk_seconds[5:0]
+@28
+display_controller_tb.display_stb
+display_controller_tb.display_busy
+display_controller_tb.display_ack
+display_controller_tb.write_config
+@200
+-
+-Module Internals
+@28
+display_controller_tb.display_controller_inst.startup
+display_controller_tb.display_controller_inst.display_update
+@200
+-
+-Serial Output
+@28
+display_controller_tb.serial_clk
+display_controller_tb.serial_dout
+display_controller_tb.serial_load
+[pattern_trace] 1
+[pattern_trace] 0

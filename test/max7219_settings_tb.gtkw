@@ -1,0 +1,68 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Fri Nov 01 20:49:34 2024
+[*]
+[dumpfile] "D:\sellicott_tt_7seg_clock_2024\max7219_settings_tb.fst"
+[dumpfile_mtime] "Fri Nov 01 20:49:00 2024"
+[dumpfile_size] 2405
+[savefile] "D:\sellicott_tt_7seg_clock_2024\test\max7219_settings_tb.gtkw"
+[timestart] 0
+[size] 1659 675
+[pos] -1 -1
+*-7.500000 299 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] max7219_settings_tb.
+[sst_width] 246
+[signals_width] 182
+[sst_expanded] 1
+[sst_vpaned_height] 181
+@28
+max7219_settings_tb.clk
+max7219_settings_tb.stb
+max7219_settings_tb.busy
+max7219_settings_tb.ack
+@200
+-
+-Block Internals
+@28
+max7219_settings_tb.display_settings.start_transfer
+max7219_settings_tb.display_settings.i_next
+@22
+max7219_settings_tb.display_settings.transfer_state[3:0]
+@200
+-
+-Display Settings
+@28
+max7219_settings_tb.write_config
+@22
+max7219_settings_tb.decode_mode[7:0]
+max7219_settings_tb.intensity[3:0]
+max7219_settings_tb.scan_limit[2:0]
+@28
+max7219_settings_tb.enable
+max7219_settings_tb.display_test
+@200
+-
+-Output Driver
+@22
+max7219_settings_tb.addr[3:0]
+max7219_settings_tb.data[7:0]
+@29
+max7219_settings_tb.disp_driver.start_transfer
+@22
+max7219_settings_tb.disp_driver.data_reg[15:0]
+@24
+max7219_settings_tb.disp_driver.transfer_state[4:0]
+@28
+max7219_settings_tb.max7219_stb
+max7219_settings_tb.max7219_busy
+max7219_settings_tb.max7219_ack
+@200
+-
+-SPI Output
+@28
+max7219_settings_tb.serial_clk
+max7219_settings_tb.serial_din
+max7219_settings_tb.serial_dout
+max7219_settings_tb.serial_load
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,41 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Fri Nov 01 15:20:08 2024
+[*]
+[dumpfile] "D:\sellicott_tt_7seg_clock_2024\max7219_tb.fst"
+[dumpfile_mtime] "Fri Nov 01 15:17:30 2024"
+[dumpfile_size] 1499
+[savefile] "D:\sellicott_tt_7seg_clock_2024\test\max7219_tb.gtkw"
+[timestart] 123
+[size] 1512 704
+[pos] 1957 -52
+*-7.500000 750 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] max7219_tb.
+[sst_width] 246
+[signals_width] 198
+[sst_expanded] 1
+[sst_vpaned_height] 192
+@28
+max7219_tb.clk
+@22
+max7219_tb.addr[3:0]
+max7219_tb.data[7:0]
+@28
+max7219_tb.disp_driver.i_stb
+max7219_tb.serial_din
+max7219_tb.serial_dout
+max7219_tb.serial_load
+max7219_tb.serial_clk
+max7219_tb.run_timeout_counter
+@24
+max7219_tb.timeout_counter[15:0]
+@200
+-Driver Internals
+@28
+max7219_tb.disp_driver.o_busy
+@24
+max7219_tb.disp_driver.transfer_state[4:0]
+@23
+max7219_tb.disp_driver.data_reg[15:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,43 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Fri Nov 01 19:21:56 2024
+[*]
+[dumpfile] "D:\sellicott_tt_7seg_clock_2024\output_wrapper_tb.fst"
+[dumpfile_mtime] "Fri Nov 01 19:21:06 2024"
+[dumpfile_size] 3504
+[savefile] "D:\sellicott_tt_7seg_clock_2024\test\output_wrapper_tb.gtkw"
+[timestart] 0
+[size] 1659 675
+[pos] -1 -1
+*-10.800000 3270 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] output_wrapper_tb.
+[sst_width] 246
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 180
+@28
+output_wrapper_tb.clk
+output_wrapper_tb.stb
+output_wrapper_tb.busy
+output_wrapper_tb.ack
+output_wrapper_tb.write_config
+@200
+-
+-Block Internals
+@28
+output_wrapper_tb.display_inst.driver_stb
+output_wrapper_tb.display_inst.driver_busy
+output_wrapper_tb.display_inst.driver_ack
+@22
+output_wrapper_tb.display_inst.clk_bcd[3:0]
+@29
+output_wrapper_tb.display_inst.clk_dp
+@200
+-
+-Serial Output
+@28
+output_wrapper_tb.serial_clk
+output_wrapper_tb.serial_dout
+output_wrapper_tb.serial_load
+[pattern_trace] 1
+[pattern_trace] 0
