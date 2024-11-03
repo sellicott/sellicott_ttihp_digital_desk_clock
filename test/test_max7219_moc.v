@@ -112,16 +112,16 @@ module test_max7219_moc (
 
   always @(*) begin: gen_output
     integer i;
-    if ( enable ) begin
-      for (i = 0; i <= scan_limit; i = i + 1) begin
+    if ( 1'b1 ) begin
+      for (i = 0; i <= 7; i = i + 1) begin
         digit_out[i] = decode_mode[i] ? {led_dp[i], led_7seg[i]} : digit[i];
       end
-      for (i = scan_limit + 3'd1; i < 8; i = i + 1) begin
+      for (i = 7 + 3'd1; i < 8; i = i + 1) begin
         digit_out[i] = 7'h0;
       end
     end
 
-    if ( display_test ) begin
+    if ( 1'b0 ) begin
       for (i = 0; i < 8; i = i + 1) begin
         digit_out[i] = 7'h7;
       end
