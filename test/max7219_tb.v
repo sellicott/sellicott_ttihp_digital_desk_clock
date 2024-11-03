@@ -152,6 +152,7 @@ module max7219_tb ();
       while (busy && timeout_counter <= TIMEOUT) @(posedge clk);
       `assert_cond(timeout_counter, <, TIMEOUT);
       run_timeout_counter = 1'h0;
+      repeat(2) @(posedge clk);
     end
   endtask
 
