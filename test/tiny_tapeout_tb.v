@@ -279,7 +279,7 @@ module tiny_tapeout_tb ();
     begin
       // wait until the outputs are initilized
       reset_timeout_counter();
-      repeat (5) @(posedge serial_load);
+      @(posedge clk_set_stb);
       i_fast_set = 1'h1;
       // set the hours and minutes
       $display("Set Hours");

@@ -19,6 +19,7 @@ will not affect the hours setting. If both `hours_set` and `minutes_set` are pre
 the seconds will be cleared to zero.
 
 A block diagram of the system is shown below.
+
 ![](block-diagram.svg)
 
 ## How to test
