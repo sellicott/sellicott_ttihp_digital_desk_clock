@@ -212,6 +212,48 @@ module tiny_tapeout_tb ();
   wire [5:0] clktime_minutes = bcd2 * 10 + bcd3;
   wire [5:0] clktime_seconds = bcd4 * 10 + bcd5;
 
+  task reset_clock ();
+    begin: clock_reset
+      integer update_count;
+
+      $display("Reset Seconds");
+      clock_reset_seconds();
+
+      $display("Reset Hours");
+      i_fast_set = 1'h1;
+      i_set_hours = 1'h1;
+      update_count = 0;
+      while(clktime_hours != 5'd0 && update_count < 30) begin 
+        @(posedge clk_set_stb);
+        $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
+                 clktime_seconds);
+        reset_timeout_counter();
+        repeat (6) @(posedge serial_load);
+        update_count = update_count + 1;
+      end
+      `assert(clktime_hours, 5'd0);
+
+      $display("Reset Minutes");
+      @(posedge clk);
+      i_set_hours   = 1'h0;
+      i_set_minutes = 1'h1;
+      update_count  = 0;
+      while(clktime_minutes != 6'd0 && update_count < 70) begin 
+        @(posedge clk_set_stb);
+        $display("Current Set Time: %02d:%02d.%02d", clktime_hours, clktime_minutes,
+                 clktime_seconds);
+        reset_timeout_counter();
+        repeat (6) @(posedge serial_load);
+        update_count = update_count + 1;
+      end
+      `assert(clktime_minutes, 6'd0);
+
+      @(posedge clk);
+      clock_reset_seconds();
+
+    end
+  endtask
+
   task clock_set_hours(input [4:0] hours_settime);
     begin: set_hours
       integer update_count;
@@ -290,6 +332,7 @@ module tiny_tapeout_tb ();
       reset_timeout_counter();
       @(posedge clk_set_stb);
       i_fast_set = 1'h1;
+      reset_clock();
       // set the hours and minutes
       $display("Set Hours");
       clock_set_hours(10);
