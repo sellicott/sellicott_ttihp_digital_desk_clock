@@ -70,12 +70,11 @@ jobs:
        shell: bash
        run: |
          cp tt_submission/*.v "$TEST_DIR/gate_level_netlist.v"
+         ls *.v
          cd "$TEST_DIR"
          rm -f tb.vcd results.xml
          make -f Makefile clean
          GATES=yes make -f Makefile
- 
-         # `make` will return success even if the tests fail, so check for failure in results.xml
          test -f results.xml
          ! grep failure results.xml
 
